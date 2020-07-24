@@ -19,12 +19,6 @@ public class Solution {
     }
 
     private boolean isFriendOf(User user, User loggedUser) {
-        for (User friend : user.getFriends()) {
-            if (friend.equals(loggedUser)) {
-                return true;
-            }
-        }
-
-        return false;
+        return user.getFriends().contains(loggedUser);
     }
 }

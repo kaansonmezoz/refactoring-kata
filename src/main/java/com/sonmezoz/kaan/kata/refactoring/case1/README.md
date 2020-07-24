@@ -36,3 +36,45 @@ one by one, you can also see iterations from the beginning to end.
 3. Extract loop into method. It's easier to understand read the method rather than loop. Also it will help us to focus 
    more on the core logic instead of loop. 
    - Apply [Extract Function](https://refactoring.com/catalog/extractFunction.html) 
+
+4. Use built-in functions whenever you can. There is no need to rediscover America.
+
+```java
+        for (User friend : user.getFriends()) {
+            if (friend.equals(loggedUser)) {
+                return true;
+            }
+        }
+
+        return false;
+```
+
+Code snippet in the above is the same of ```ArrayList.contains(obj)``` Let's look closer to implementation of contains method
+
+```java
+    public boolean contains(Object o) {
+        return indexOf(o) >= 0;
+    }
+
+    public int indexOf(Object o) {
+        return indexOfRange(o, 0, size);
+    }
+
+    int indexOfRange(Object o, int start, int end) {
+        Object[] es = elementData;
+        if (o == null) {
+            for (int i = start; i < end; i++) {
+                if (es[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = start; i < end; i++) {
+                if (o.equals(es[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+``` 

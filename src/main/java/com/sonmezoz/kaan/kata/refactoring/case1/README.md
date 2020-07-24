@@ -17,4 +17,19 @@ one by one, you can also see iterations from the beginning to end.
    else scope. But whole logic in the else is throwing an exception. But we always keep the else part in mind while we are
    reading if block. If we used [GuardClause](https://wiki.c2.com/?GuardClause) or [BouncerPattern](https://wiki.c2.com/?BouncerPattern) 
    we would validate ```loggedUser``` before reading if block. So we didn't have to care about it, after the validation.
-   - Refactoring we are going to apply is similar to [Replace Nested Conditional with Guard Clauses](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html)   
+   - Refactoring we are going to apply is similar to [Replace Nested Conditional with Guard Clauses](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html)
+
+2. Now, let's focus on the code below. 
+  ````java
+        if (isFriend) {
+            tripList = TripDAO.findTripsByUser(user);
+        }
+
+        return tripList;
+  ````   
+  If ```isFriend``` is true, we overwritte the ````tripList```` and then return it. What we can do is, simplifying into one line
+  How ? Instead of assigning to tripList we can just return that value.
+  
+  ````java
+    return isFriend ? TripDAO.findTripsByUser(user) : tripList
+  ```` 

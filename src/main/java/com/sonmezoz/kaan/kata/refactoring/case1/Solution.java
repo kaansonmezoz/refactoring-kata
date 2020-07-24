@@ -8,18 +8,24 @@ public class Solution {
         List<Trip> tripList = new ArrayList<Trip>();
         User loggedUser = UserSession.getInstance().getLoggedUser();
         boolean isFriend = false;
-        if (loggedUser != null) {
-            for (User friend : user.getFriends()) {
-                if (friend.equals(loggedUser)) {
-                    isFriend = true;
-                    break;
-                }
+
+        validateLoggedUser(loggedUser);
+
+        for (User friend : user.getFriends()) {
+            if (friend.equals(loggedUser)) {
+                isFriend = true;
+                break;
             }
-            if (isFriend) {
-                tripList = TripDAO.findTripsByUser(user);
-            }
-            return tripList;
-        } else {
+        }
+        if (isFriend) {
+            tripList = TripDAO.findTripsByUser(user);
+        }
+
+        return tripList;
+    }
+
+    private void validateLoggedUser(User loggedUser) throws UserNotLoggedInException {
+        if (loggedUser == null) {
             throw new UserNotLoggedInException();
         }
     }

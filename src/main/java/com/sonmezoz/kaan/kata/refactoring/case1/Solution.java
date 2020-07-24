@@ -6,23 +6,25 @@ import java.util.List;
 public class Solution {
     public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
         User loggedUser = UserSession.getInstance().getLoggedUser();
-        boolean isFriend = false;
 
         validateLoggedUser(loggedUser);
 
-        for (User friend : user.getFriends()) {
-            if (friend.equals(loggedUser)) {
-                isFriend = true;
-                break;
-            }
-        }
-
-        return isFriend ? TripDAO.findTripsByUser(user) : new ArrayList<Trip>();
+        return isFriendOf(user, loggedUser) ? TripDAO.findTripsByUser(user) : new ArrayList<Trip>();
     }
 
     private void validateLoggedUser(User loggedUser) throws UserNotLoggedInException {
         if (loggedUser == null) {
             throw new UserNotLoggedInException();
         }
+    }
+
+    private boolean isFriendOf(User user, User loggedUser) {
+        for (User friend : user.getFriends()) {
+            if (friend.equals(loggedUser)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

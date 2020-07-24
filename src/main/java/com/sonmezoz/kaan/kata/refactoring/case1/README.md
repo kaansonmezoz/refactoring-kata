@@ -29,7 +29,10 @@ one by one, you can also see iterations from the beginning to end.
   ````   
   If ```isFriend``` is true, we overwritte the ````tripList```` and then return it. What we can do is, simplifying into one line
   How ? Instead of assigning to tripList we can just return that value.
-  
   ````java
     return isFriend ? TripDAO.findTripsByUser(user) : tripList
   ```` 
+
+3. Extract loop into method. It's easier to understand read the method rather than loop. Also it will help us to focus 
+   more on the core logic instead of loop. 
+   - Apply [Extract Function](https://refactoring.com/catalog/extractFunction.html) 

@@ -11,13 +11,13 @@ public class Report {
     public static void report(Writer out, List<Machine> machines, Robot robot) throws IOException {
         out.write("FACTORY REPORT\n");
 
-        reportMachine(out, machines);
+        reportMachines(out, machines);
         reportRobot(out, robot);
 
         out.write("========\n");
     }
 
-    private static void reportMachine(Writer out, List<Machine> machines) throws IOException {
+    private static void reportMachines(Writer out, List<Machine> machines) throws IOException {
         for (Machine machine : machines) {
             out.write("Machine " + machine.name());
             reportField(out, "bin", machine.bin());

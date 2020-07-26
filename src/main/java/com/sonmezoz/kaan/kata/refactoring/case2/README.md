@@ -1,0 +1,1 @@
+This case is taken from https://kata-log.rocks/bugs-zero-kata. Legacy code can be found on https://github.com/caradojo/trivia
